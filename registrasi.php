@@ -29,7 +29,7 @@
             <input type="password" name="password" id="password" class="form control" >
             <br>
             <br>
-             <td><input type="submit" name="submit" value="add">Registrasi</td>
+             <td><input type="submit" name="submit"></td>
         </form>
     </div>
 
@@ -41,6 +41,7 @@
   </body>
 </html>
 <?php
+
 if(isset($_POST['submit'])) {
     $name       = $_POST['name'];
     if(empty($name)){
@@ -49,15 +50,18 @@ if(isset($_POST['submit'])) {
         echo 'alert("Nama tidak boleh kosong")';  
         echo '</script>';  
         die();
+    }else{
+        // $c = cek_input($name);
+        if(!preg_match("/^[a-zA-Z ]*$/",$name))
+        {
+        
+            echo '<script type ="text/JavaScript">';  
+            echo 'alert("Inputan Hanya boleh huruf dan spasi")';  
+            echo '</script>';  
+            die(); 
+            // echo $nameErr;
+        }
     }
-    // else{
-    //     $c = cek_input($name);
-    //     if(!preg_match("/^[a-zA-Z ]*$/",$c))
-    //     {
-    //         $nameErr = "Inputan Hanya boleh huruf dan spasi"; 
-    //         // echo $nameErr;
-    //     }
-    // }
     $username   = $_POST['username'];
     if(empty($username)){
       echo '<script type ="text/JavaScript">';  
@@ -65,15 +69,13 @@ if(isset($_POST['submit'])) {
         echo '</script>';  
         die();
       // echo $error_nama;
+    }else{
+        if(!preg_match("/^[a-zA-Z ]*$/",$username))
+        {
+            $nameErr = "Inputan Hanya boleh huruf dan spasi"; 
+            // echo $nameErr;
+        }
     }
-    // else{
-    //   $a = cek_input($username);
-    //     if(!preg_match("/^[a-zA-Z ]*$/",$a))
-    //     {
-    //         $nameErr = "Inputan Hanya boleh huruf dan spasi"; 
-    //         // echo $nameErr;
-    //     }
-    // }
     
     $password   = $_POST['password'];
     if(empty($password)){
@@ -81,15 +83,13 @@ if(isset($_POST['submit'])) {
         echo 'alert("Password tidak boleh kosong")';  
         echo '</script>';  
         die();
+    }else{
+        if(!preg_match("/^[a-zA-Z ]*$/",$password))
+        {
+            $nameErr = "Inputan Hanya boleh huruf dan spasi"; 
+            // echo $nameErr;
+        }
     }
-    // else{
-    //   $b = cek_input($password);
-    //     if(!preg_match("/^[a-zA-Z ]*$/",$b))
-    //     {
-    //         $nameErr = "Inputan Hanya boleh huruf dan spasi"; 
-    //         // echo $nameErr;
-    //     }
-    // }
 
     //password hassing adalah password yang paling aman dalam tingkat perpasswordan
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -102,15 +102,12 @@ if(isset($_POST['submit'])) {
       //insert data 
       $save = mysqli_query($mysqli, "INSERT INTO login(name,username, password,created_by) VALUES ('$name','$username','$password_hash','$name')");
       if($save){
-        echo "Registrasi anda berhasil";
+       
+        echo '<script type ="text/JavaScript">';  
+        echo 'alert("Registrasi anda berhasil")';  
+        echo '</script>';  
+        die();
       }
-
-      // function cek_input($data) {
-      //   $data = trim($data);
-      //   $data = stripslashes($data);
-      //   $data = htmlspecialchars($data);
-      //   return $data;
-      // }
 
 }
      
