@@ -127,6 +127,7 @@
     </div>
 </body>
 </html>
+
 <?php
 if(isset($_POST['submit'])) {
    
@@ -163,7 +164,7 @@ if(isset($_POST['submit'])) {
     include_once('config.php');
 
     //query
-    
+
     //$username perlu di-escape menggunakan mysqli_real_escape_string untuk mencegah serangan SQL injection.
     $username = mysqli_real_escape_string($mysqli, $username); 
     $query = mysqli_query($mysqli, "SELECT id, username, password, name FROM login WHERE username = '$username'");
@@ -178,16 +179,19 @@ if(isset($_POST['submit'])) {
             $checkPass = $row['password'];
         }
 
-        if(password_verify($password, $checkPass)){
+       if (password_verify($password, $checkPass)) {
             session_start();
-                $_SESSION['id'] = $id;
-                $_SESSION['name'] = $name;
-                $_SESSION['username'] = $username;
-                print_r($_SESSION);
-        }else{
-            echo '<script type ="text/JavaScript">';  
-            echo 'alert("Username atau password tidak cocok")';  
-            echo '</script>';  
+            if (isset($_SESSION['username'])) {
+                echo '<script type="text/javascript">';
+                echo 'alert("Anda berhasil login");';
+                echo 'window.location.href = "dashboard.php";'; // Mengarahkan ke halaman dashboard setelah menampilkan alert
+                echo '</script>';
+                exit;
+            }
+        } else {
+            echo '<script type="text/JavaScript">';
+            echo 'alert("Username atau password tidak cocok")';
+            echo '</script>';
             die();
         }
 
