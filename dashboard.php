@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(!isset($_SESSION['username'])) {
+    header('location: login.php');
+}
+  include_once('config.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -88,11 +96,11 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../../pages/forms/basic_elements.html">
+            <a class="nav-link" href="addDataBarang.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
-              <span class="menu-title">Form Elements</span>
+              <span class="menu-title">Stock Barang</span>
             </a>
           </li>
           <li class="nav-item menu-items">

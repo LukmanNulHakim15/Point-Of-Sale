@@ -45,7 +45,6 @@
 if(isset($_POST['submit'])) {
     $name       = $_POST['name'];
     if(empty($name)){
-        // $error_nama = "Nama tidak boleh kosong";
         echo '<script type ="text/JavaScript">';  
         echo 'alert("Nama tidak boleh kosong")';  
         echo '</script>';  

@@ -181,12 +181,13 @@ if(isset($_POST['submit'])) {
 
        if (password_verify($password, $checkPass)) {
             session_start();
-            if (isset($_SESSION['username'])) {
+            $_SESSION['username']   = $username;
+            $_SESSION['name']       = $name;
+           if (isset($_SESSION['username'])) {
                 echo '<script type="text/javascript">';
                 echo 'alert("Anda berhasil login");';
                 echo 'window.location.href = "dashboard.php";'; // Mengarahkan ke halaman dashboard setelah menampilkan alert
                 echo '</script>';
-                exit;
             }
         } else {
             echo '<script type="text/JavaScript">';
